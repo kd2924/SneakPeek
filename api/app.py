@@ -11,7 +11,8 @@ load_dotenv()
 app = Flask(__name__)
 
 # Enable CORS for Vercel domain
-CORS(app, resources={r"/*": {"origins": "https://your-vercel-frontend.vercel.app"}})
+CORS(app, resources={r"/*": {"origins": "https://sneak-peek-psi.vercel.app"}})
+
 
 @app.route('/')
 def home():
