@@ -11,7 +11,8 @@ load_dotenv()
 app = Flask(__name__)
 
 # Enable CORS for your Flask app
-CORS(app)
+#CORS(app)
+CORS(app, resources={r"/api/*": {"origins": ["http://[::]:8000/", "http://127.0.0.1:8000", "http://localhost:8000"]}}, supports_credentials=True)
 
 
 
