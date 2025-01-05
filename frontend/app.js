@@ -1,6 +1,6 @@
 async function searchSneakers() {
     const sku = document.getElementById('skuInput').value.trim();
-    const baseUrl = "http://127.0.0.1:5000/api/sneakers";
+    const baseUrl = "/api/sneakers";
 
 
   
@@ -20,7 +20,7 @@ async function searchSneakers() {
   
       const product = data.product || {};
       document.getElementById('sneakerName').innerText = product.name || 'Sneaker Not Found';
-      document.getElementById('sneakerImage').src = ''; 
+      document.getElementById('sneakerImage').src = product.thumbnail_url || 'default_image.png';
       document.getElementById('retailPrice').innerText = product.price ? `$${product.price}` : 'N/A';
       document.getElementById('lowestAsk').innerText = product.lowest_ask ? `$${product.lowest_ask}` : 'N/A';
       document.getElementById('highestBid').innerText = product.highest_bid ? `$${product.highest_bid}` : 'N/A';
@@ -38,7 +38,7 @@ async function searchSneakers() {
   
   function resetUI() {
     document.getElementById('sneakerName').innerText = 'Sneaker Not Found';
-    document.getElementById('sneakerImage').src = ''; 
+    document.getElementById('sneakerImage').src = 'default_image.png';
     document.getElementById('retailPrice').innerText = 'N/A';
     document.getElementById('lowestAsk').innerText = 'N/A';
     document.getElementById('highestBid').innerText = 'N/A';
