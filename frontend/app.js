@@ -1,6 +1,6 @@
 async function searchSneakers() {
   const sku = document.getElementById('skuInput').value.trim();
-  const baseUrl = "https://sneak-peek-psi.vercel.app/api/sneakers/DM7866-001";
+  const baseUrl = "https://sneak-peek-psi.vercel.app/api/sneakers";
 
 
   
