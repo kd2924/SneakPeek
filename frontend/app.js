@@ -1,6 +1,9 @@
 async function searchSneakers() {
   const sku = document.getElementById('skuInput').value.trim();
-  const baseUrl = "http://127.0.0.1:5000/api/sneakers";
+  const baseUrl = "https://sneak-peek-zeta.vercel.app/api/sneakers";
+
+  
+
 
   if (!sku) {
       alert('Please enter a valid SKU!');
