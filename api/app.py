@@ -11,11 +11,7 @@ load_dotenv()
 app = Flask(__name__)
 
 # Enable CORS for your Flask app
-#CORS(app)
-CORS(app, resources={r"/api/*": {"origins": ["http://[::]:8000/", "http://127.0.0.1:8000", "http://localhost:8000"]}}, supports_credentials=True)
-
-
-
+CORS(app)
 
 # Home route
 @app.route('/')
@@ -40,7 +36,9 @@ def get_sneaker(sku):
         # Make a GET request to RapidAPI
         response = requests.get(external_api_url, headers=headers)
         response.raise_for_status()  # Raise an error for bad responses (4xx/5xx)
-        return jsonify(response.json())  # Return the API response as JSON
+        data = response.json()
+        print("API Response:", data)  # Debugging
+        return jsonify(data)  # Return the API response as JSON
     except requests.exceptions.RequestException as e:
         return jsonify({'error': str(e)}), 500  # Return the error message with status code 500
 
