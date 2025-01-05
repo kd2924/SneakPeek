@@ -42,6 +42,8 @@ def get_sneaker(sku):
     except requests.exceptions.RequestException as e:
         return jsonify({'error': str(e)}), 500  # Return the error message with status code 500
 
+
+
 # Run the Flask app
 if __name__ == '__main__':
     app.run(debug=True)
