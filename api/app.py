@@ -11,7 +11,9 @@ load_dotenv()
 app = Flask(__name__)
 
 # Enable CORS for your Flask app
-CORS(app)
+#CORS(app)
+CORS(app, resources={r"/*": {"origins": "https://sneak-peek-psi.vercel.app"}})
+
 
 # Home route
 @app.route('/')
