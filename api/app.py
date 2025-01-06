@@ -13,7 +13,6 @@ app = Flask(__name__)
 # Enable CORS for Vercel domain
 CORS(app, resources={r"/*": {"origins": "https://sneak-peek-psi.vercel.app"}})
 
-
 @app.route('/')
 def home():
     return "Sneaker Backend is Running"
@@ -23,7 +22,7 @@ def get_sneaker(sku):
     sku = sku.strip()
     product_url = f"https://stockx.com/{sku}"
     external_api_url = f"https://sneaker-database-stockx.p.rapidapi.com/searchByUrl?url={product_url}"
-    
+
     headers = {
         'x-rapidapi-host': os.getenv('RAPIDAPI_HOST'),
         'x-rapidapi-key': os.getenv('RAPIDAPI_KEY')

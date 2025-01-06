@@ -2,44 +2,39 @@ async function searchSneakers() {
   const sku = document.getElementById('skuInput').value.trim();
   const baseUrl = "https://sneak-peek-psi.vercel.app/api/sneakers";
 
-
-  
-
-
   if (!sku) {
-      alert('Please enter a valid SKU!');
-      return;
+    alert('Please enter a valid SKU!');
+    return;
   }
 
   try {
-      const response = await fetch(`${baseUrl}/${encodeURIComponent(sku)}`);
-      if (!response.ok) {
-          throw new Error('Sneaker not found');
-      }
+    const response = await fetch(`${baseUrl}/${encodeURIComponent(sku)}`);
+    if (!response.ok) {
+      throw new Error('Sneaker not found');
+    }
 
-      const data = await response.json();
-      console.log('Data received:', data);
+    const data = await response.json();
+    console.log('Data received:', data);
 
-      const product = data.product || {};
-      document.getElementById('sneakerName').innerText = product.name || 'Sneaker Not Found';
-      
-      // Dynamically update the sneaker image
-      const imageElement = document.getElementById('sneakerImage');
-      imageElement.src = product.thumbnail_url || 'default_image.png'; // Use default if API doesn't return an image
-      imageElement.alt = product.name || 'Sneaker Image';
-      
-      document.getElementById('retailPrice').innerText = product.price ? `$${product.price}` : 'N/A';
-      document.getElementById('lowestAsk').innerText = product.lowest_ask ? `$${product.lowest_ask}` : 'N/A';
-      document.getElementById('highestBid').innerText = product.highest_bid ? `$${product.highest_bid}` : 'N/A';
-      document.getElementById('salesLast72').innerText = product.sales_last_72 || 'N/A';
-      document.getElementById('deadstockSold').innerText = product.deadstock_sold || 'N/A';
-      document.getElementById('releaseDate').innerText = product.release_date || 'N/A';
+    const product = data.product || {};
+    document.getElementById('sneakerName').innerText = product.name || 'Sneaker Not Found';
 
-      const recommendation = getRecommendation(product);
-      updateRecommendationUI(recommendation);
+    const imageElement = document.getElementById('sneakerImage');
+    imageElement.src = product.thumbnail_url || 'default_image.png';
+    imageElement.alt = product.name || 'Sneaker Image';
+
+    document.getElementById('retailPrice').innerText = product.price ? `$${product.price}` : 'N/A';
+    document.getElementById('lowestAsk').innerText = product.lowest_ask ? `$${product.lowest_ask}` : 'N/A';
+    document.getElementById('highestBid').innerText = product.highest_bid ? `$${product.highest_bid}` : 'N/A';
+    document.getElementById('salesLast72').innerText = product.sales_last_72 || 'N/A';
+    document.getElementById('deadstockSold').innerText = product.deadstock_sold || 'N/A';
+    document.getElementById('releaseDate').innerText = product.release_date || 'N/A';
+
+    const recommendation = getRecommendation(product);
+    updateRecommendationUI(recommendation);
   } catch (error) {
-      console.error('Error:', error.message);
-      resetUI();
+    console.error('Error:', error.message);
+    resetUI();
   }
 }
 
@@ -71,11 +66,11 @@ function updateRecommendationUI(recommendation) {
   recommendationElement.className = 'recommendation';
 
   if (recommendation === 'Sell Now') {
-      recommendationElement.classList.add('sell');
+    recommendationElement.classList.add('sell');
   } else if (recommendation === 'Monitor Closely') {
-      recommendationElement.classList.add('monitor');
+    recommendationElement.classList.add('monitor');
   } else if (recommendation === 'Hold for Now') {
-      recommendationElement.classList.add('hold');
+    recommendationElement.classList.add('hold');
   }
 }
 
