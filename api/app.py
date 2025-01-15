@@ -4,14 +4,12 @@ import requests
 from dotenv import load_dotenv
 import os
 
-# Load environment variables from .env
+# Load environment variables
 load_dotenv()
 
 # Initialize Flask app
 app = Flask(__name__)
-
-# Enable CORS for Vercel domain
-CORS(app, resources={r"/*": {"origins": "https://sneak-peek-rho.vercel.app/"}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route('/')
 def home():
@@ -31,7 +29,9 @@ def get_sneaker(sku):
     try:
         response = requests.get(external_api_url, headers=headers)
         response.raise_for_status()
-        data = response.json()
-        return jsonify(data)
+        return jsonify(response.json())
     except requests.exceptions.RequestException as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({"error": str(e)}), 500
+
+if __name__ == '__main__':
+    app.run(debug=True)
